@@ -3,7 +3,7 @@ import {getFirestore, collection, getDocs, query, orderBy} from 'firebase/firest
 
 export const useItineraryStore = defineStore("Itinerary", {
     state: () => ({
-        session: []
+        event: []
     }),
     getters: {
 
@@ -18,7 +18,7 @@ export const useItineraryStore = defineStore("Itinerary", {
                 snap.forEach((doc) => {
                     results.push({id: doc.id, ...doc.data()});
                 })                
-                this.session = results.sort((a,b) => (parseFloat(a.id) - parseFloat(b.id)))
+                this.event = results.sort((a,b) => (parseFloat(a.id) - parseFloat(b.id)))
                 console.log(results)
             } catch (e) {
                 alert(e.message)
