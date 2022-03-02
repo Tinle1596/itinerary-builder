@@ -19,7 +19,6 @@ export const useItineraryStore = defineStore("Itinerary", {
                     results.push({id: doc.id, ...doc.data()});
                 })                
                 this.event = results.sort((a,b) => (parseFloat(a.id) - parseFloat(b.id)))
-                console.log(results)
             } catch (e) {
                 alert(e.message)
             }

@@ -1,16 +1,23 @@
 <template>
-  <div>
-    <v-container>             
-       <v-timeline align-top dense>
+  <div :style="image">
+    <v-container>      
+       <v-timeline align-top dense>        
            <v-timeline-item v-for="(session, index) in event" v-bind:key="index" dense>
+             <span v-if="session.date">
+               <v-chip large color="primary">
+                  {{session.date}}
+               </v-chip>
+             </span>
              <v-row>
                <v-col>
-                 <strong>{{session.time}}</strong>
+                 <strong class="session-time">{{session.time}}</strong>
                </v-col>
              </v-row>
                <v-card dense rounded>
                    <v-card-title>
+                     <b>
                        {{session.title}}
+                     </b>
                    </v-card-title>
                    <v-card-text>
                      <v-list v-for="(item, index) in session.details" v-bind:key="index" dense>                       
@@ -44,7 +51,8 @@ export default {
   },
 
   data: () => ({
-      sessions: []
+      sessions: [],
+      image: { backgroundImage: '../assets/background.jpg'}
   }),
 
   computed: {
@@ -53,5 +61,8 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
+.session-time{
+  color: white;
+}
 </style>
