@@ -29,9 +29,19 @@
     </v-container>
   </div>
 </template>
+
 <script>
+import {useItineraryStore} from "../store/useItinerary"
+import {mapActions, mapGetters} from "pinia"
+
 export default {
   name: "timeline",
+  setup() {
+    const itineraryStore = useItineraryStore();
+    itineraryStore.getEvent()
+
+    return {}
+  },
 
   data: () => ({
       sessions: [
@@ -53,7 +63,11 @@ export default {
             {item: "NS (grade 9) & HS & HSTT & HT - Fr Marion"}
             ]}
           ]
-  })
+  }),
+
+  computed: {
+    ...mapGetters(useItineraryStore, [])
+  },    
 };
 </script>
 
