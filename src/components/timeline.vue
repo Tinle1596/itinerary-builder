@@ -1,5 +1,5 @@
 <template>
-  <div :style="image">
+  <div>
     <v-container>      
        <v-timeline align-top dense>        
            <v-timeline-item v-for="(session, index) in event" v-bind:key="index" dense>
@@ -51,8 +51,7 @@ export default {
   },
 
   data: () => ({
-      sessions: [],
-      image: { backgroundImage: '../assets/background.jpg'}
+      sessions: [],      
   }),
 
   computed: {
