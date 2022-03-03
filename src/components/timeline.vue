@@ -10,7 +10,7 @@
              </span>
              <v-row>
                <v-col>
-                 <strong>{{session.startTime}} - {{session.endTime}} - {{session.timeStamp}}</strong>                 
+                 <strong>{{session.startTime}} <span v-if="session.endTime">- {{session.endTime}}</span></strong>                 
                </v-col>
              </v-row>
              <div >
@@ -52,8 +52,7 @@ export default {
     return {}
   },
 
-  data: () => ({
-      sessions: [],
+  data: () => ({      
       currentTime: ''
   }),
 
@@ -64,7 +63,20 @@ export default {
 
   methods: {
     jumpTo(refName){      
-     let element =  this.$refs['time-'+ refName]
+
+      let closestTime = null;      
+      this.event.forEach(x => {        
+        if(closestTime == null){
+          if(Date.parse(x.timeStamp.toUpperCase()) >= Date.parse(this.currentTime.toUpperCase())){
+            closestTime = x.timeStamp
+          }
+        }
+      });
+
+    console.log(refName)
+    console.log(closestTime)
+     let element =  this.$refs['time-'+ closestTime]
+     console.log(element)
      if(element){
         let offsetTop = element[0].$el.offsetTop;
         window.scrollTo({top: offsetTop, behavior:'smooth'});
