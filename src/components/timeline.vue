@@ -73,10 +73,7 @@ export default {
         }
       });
 
-    console.log(refName)
-    console.log(closestTime)
      let element =  this.$refs['time-'+ closestTime]
-     console.log(element)
      if(element){
         let offsetTop = element[0].$el.offsetTop;
         window.scrollTo({top: offsetTop, behavior:'smooth'});
