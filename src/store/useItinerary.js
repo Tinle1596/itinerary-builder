@@ -27,7 +27,11 @@ export const useItineraryStore = defineStore("Itinerary", {
                     if(x.hasOwnProperty('date')){
                         date = x.date
                     }
-                    x.timeStamp = date + ', ' + x.startTime
+                    if (x.hasOwnProperty('endTime')){
+                        x.timeStamp = date + ', ' + x.endTime
+                    } else {
+                        x.timeStamp = date + ', ' + x.startTime
+                    }
                     return x;
                 })                
 
