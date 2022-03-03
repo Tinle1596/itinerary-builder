@@ -10,7 +10,7 @@
              </span>
              <v-row>
                <v-col>
-                 <strong class="session-time">{{session.time}}</strong>
+                 <strong>{{session.time}}</strong>
                </v-col>
              </v-row>
                <v-card dense rounded>
@@ -61,7 +61,5 @@ export default {
 </script>
 
 <style scoped>
-.session-time{
-  color: white;
-}
+
 </style>
