@@ -1,8 +1,8 @@
 <template>
   <div>
-    <v-container>      
+    <v-container>
        <v-timeline align-top dense>        
-           <v-timeline-item v-for="(session, index) in event" v-bind:key="index" dense>
+           <v-timeline-item v-for="session in event" v-bind:key="session.timestamp" dense :ref="'time-' + session.timeStamp">
              <span v-if="session.date">
                <v-chip large color="primary">
                   {{session.date}}
@@ -10,9 +10,10 @@
              </span>
              <v-row>
                <v-col>
-                 <strong class="session-time">{{session.time}}</strong>
+                 <strong>{{session.startTime}} - {{session.endTime}} - {{session.timeStamp}}</strong>                 
                </v-col>
              </v-row>
+             <div >
                <v-card dense rounded>
                    <v-card-title>
                      <b>
@@ -31,6 +32,7 @@
                    </v-card-text>
                    <v-card-text></v-card-text>
                </v-card>
+              </div>
            </v-timeline-item>
         </v-timeline> 
     </v-container>
@@ -51,17 +53,35 @@ export default {
   },
 
   data: () => ({
-      sessions: [],      
+      sessions: [],
+      currentTime: ''
   }),
 
   computed: {
-    ...mapState(useItineraryStore, ['event'])
-  },    
+    ...mapState(useItineraryStore, ['event']),
+
+  },
+
+  methods: {
+    jumpTo(refName){      
+     let element =  this.$refs['time-'+ refName]
+     if(element){
+        let offsetTop = element[0].$el.offsetTop;
+        window.scrollTo({top: offsetTop, behavior:'smooth'});
+     }
+    }
+  },
+
+  created(){
+      this.currentTime = new Date().toLocaleString('en-US', { month: "numeric", day:"numeric", year:"numeric", hour12: true, hour:"numeric", minute:"numeric"}).toLowerCase();      
+  },
+
+  updated(){      
+      this.jumpTo(this.currentTime)
+  }
 };
 </script>
 
 <style scoped>
-.session-time{
-  color: white;
-}
+
 </style>
